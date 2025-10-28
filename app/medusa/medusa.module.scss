@@ -1,0 +1,68 @@
+.mediaArea {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  height: 360px;
+}
+
+/* Stage is a positioned box where both images are centered on top of each other initially */
+.stage {
+  position: relative;
+  width: 420px;
+  height: 320px;
+}
+
+.medusaImg,
+.oldmanImg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 700ms cubic-bezier(.2,.9,.2,1), opacity 500ms ease;
+  will-change: transform, opacity;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  backface-visibility: hidden;
+}
+
+/* Medusa initial: slightly larger and centered */
+.medusaImg {
+  transform: translate(-50%, -50%) scale(1.50);
+  z-index: 2;
+}
+
+/* When merged, medusa moves to the right and scales down */
+.medusaMerged {
+  transform: translate(calc(-50% + 120px), -50%) scale(0.9);
+}
+
+/* Oldman initial: hidden (transparent and slightly scaled down) */
+.oldmanImg {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.85);
+  z-index: 1;
+}
+
+/* Oldman visible: slide to the left and fade in */
+.oldmanVisible {
+  opacity: 1;
+  transform: translate(calc(-50% - 120px), -50%) scale(0.9);
+}
+
+.plus {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  font-size: 2.25rem;
+  color: #666;
+  font-weight: 800;
+  opacity: 0;
+  transition: opacity 350ms ease 180ms, transform 350ms ease 180ms;
+}
+
+.plusVisible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}

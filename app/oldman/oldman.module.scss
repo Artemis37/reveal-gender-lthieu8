@@ -1,0 +1,13 @@
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.25rem;
+}
+
+.imageWrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  /* animation handled by global utility class `.use-fade-up` */
+}
+

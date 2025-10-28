@@ -1,0 +1,95 @@
+.wrapper {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff0f8; /* start pink (matches site) */
+  transition: background-color 600ms ease;
+}
+
+.pinkBackground {
+  background: var(--primary);
+}
+
+.content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.message {
+  color: #fff;
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 600ms ease, transform 600ms ease;
+  transform: translateY(6px);
+}
+
+.message.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.message.hidden {
+  opacity: 0;
+  transform: translateY(-12px);
+}
+
+.imageWrap {
+  width: 22rem;
+  height: 22rem;
+  opacity: 0;
+  transition: opacity 700ms ease, transform 700ms ease;
+  transform: scale(0.95);
+}
+
+.imageWrap.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Fullscreen background that will display the male.svg and contain the fireworks */
+.fullscreenImage {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 600ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fullscreenImage.visible {
+  opacity: 1;
+  pointer-events: none;
+  background-color: #2b6cb0;
+}
+
+.bgImage {
+  /* center a resized image box so the svg is not excessively large */
+  position: relative;
+  width: min(80vw, 780px);
+  height: min(80vh, 780px);
+  background-image: url('/male.svg');
+  background-size: contain; /* fit inside the box */
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: auto;
+  z-index: 3;
+}
+
+.resultImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}

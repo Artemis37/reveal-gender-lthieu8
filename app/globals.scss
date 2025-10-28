@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+SAS:wght@100..400&display=swap');
+@import "tailwindcss";
+
+:root {
+  --primary: #fcaad6;
+  --ripplePink: #fcc3e1;
+  --secondary: #fff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #fcaad6;
+    --secondary: #ededed;
+  }
+}
+
+body {
+  background: var(--primary);
+  color: var(--secondary);
+  font-family: 'Playwrite DE SAS', Arial, Helvetica, sans-serif;
+}
+
+.page-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: var(--primary);
+
+  .hero {
+    text-align: center;
+    max-width: 780px;
+    width: 100%;
+    margin: 0 auto;
+
+    .hero-title {
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      margin: 0 0 1.25rem;
+      color: var(--secondary);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 900ms cubic-bezier(.2,.9,.2,1) forwards;
+      animation-delay: 200ms;
+    }
+
+    .hero-btn {
+  background-color: var(--secondary);
+  color: var(--primary);
+  border: 2px solid rgba(255,255,255,0.9);
+  padding: 0.875rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+
+      /* Button ripple effect (created dynamically on click) */
+      position: relative;
+      overflow: hidden;
+
+      &:hover {
+        /* lift the button a bit on hover */
+        transform: translateY(-6px);
+        box-shadow: 0 14px 32px rgba(0,0,0,0.16);
+        outline: none;
+      }
+
+      .ripple {
+        position: absolute;
+        border-radius: 50%;
+        transform: scale(0);
+        left: 0;
+        top: 0;
+        /* pink ripple that spreads out */
+        background-color: var(--ripplePink);
+        animation: ripple 1200ms cubic-bezier(.2,.9,.2,1);
+        pointer-events: none;
+        z-index: 0; /* keep ripple behind the text */
+      }
+
+      .btn-inner {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeUp 900ms cubic-bezier(.2,.9,.2,1) forwards;
+        animation-delay: 500ms;
+
+        .btn-label {
+          position: relative;
+          z-index: 1; /* ensure label floats above ripple */
+          display: inline-block;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(6);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reusable global fade-up utility so components can share the same animation */
+.use-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 900ms cubic-bezier(.2,.9,.2,1) forwards;
+  /* allow overriding delay with --fade-delay */
+  animation-delay: var(--fade-delay, 350ms);
+}
+
+/* Dice animations: spin and hop for the dice emoji when merged */
+@keyframes diceSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes diceHop {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+.hero-btn.dice .btn-label {
+  display: inline-block; /* ensure transform works */
+  font-size: 1.75rem; /* larger dice */
+  line-height: 1;
+  animation: diceSpin 1600ms linear infinite, diceHop 900ms ease-in-out infinite;
+  transform-origin: 50% 50%;
+}
+
+/* Rolling override: faster spin while `.rolling` class is present */
+@keyframes diceRoll {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(1080deg); }
+}
+
+.hero-btn.dice.rolling .btn-label {
+  /* faster, more intense spin while keeping the gentle hop */
+  animation: diceRoll 400ms linear 0s 4, diceHop 900ms ease-in-out infinite;
+}
