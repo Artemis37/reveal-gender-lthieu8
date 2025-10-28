@@ -14,12 +14,8 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary: #fcaad6;
-    --secondary: #ededed;
-  }
-}
+/* Removed dark theme overrides so the site always uses the light color variables.
+   If you later want to support dark mode, re-add overrides here. */
 
 body {
   background: var(--primary);
