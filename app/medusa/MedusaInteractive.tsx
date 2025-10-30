@@ -109,9 +109,9 @@ const MedusaInteractive: React.FC<Props> = ({ medusaName, medusaImage, oldmanNam
               // If already rolling, ignore
               if (rolling) return
 
-              // target: 17:00 on 31 Oct 2025 (local time)
+              // target: 19:30 on 31 Oct 2025 (local time)
               const now = new Date()
-              const target = new Date(2025, 9, 31, 17, 0, 0)
+              const target = new Date(2025, 9, 31, 19, 30, 0)
               if (now < target) {
                 // show live countdown and do nothing else
                 setShowCountdown(true)
