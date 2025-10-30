@@ -37,7 +37,7 @@ const Page: React.FC = () => {
   return (
     <main className="page-hero">
       <div className="hero" role="region" aria-label="Trang chủ">
-        <h1 className="hero-title">Đoán xem tiểu Hiếu là công hay thụ</h1>
+        <h1 className="hero-title">Đoán xem tiểu Tít là công hay thụ</h1>
         <button className="hero-btn" aria-label="Bắt đầu" onClick={createRipple}>
           <span className="btn-inner">
             <span className="btn-label">Bắt đầu</span>
